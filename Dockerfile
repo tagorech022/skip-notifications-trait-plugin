@@ -1,8 +1,11 @@
-FROM maven:3.9.6-eclipse-temurin-11
+# Use Maven with Java 17 (required by Jenkins plugins)
+FROM maven:3.9.6-eclipse-temurin-17
 
-WORKDIR /app
+# Set working directory
+WORKDIR /splunk-plugin
+
+# Copy source code into the container
 COPY . .
 
-RUN mvn clean install -DskipTests
-
-CMD ["bash"]
+# Build and test the plugin
+CMD ["mvn", "test"]
